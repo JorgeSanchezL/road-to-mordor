@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Camino a Mordor</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>El Camino a Mordor</h1>
+    <p class="subtitle">Un paso hoy, un paso mañana, hasta llegar al Monte del Destino.</p>
+    <span class="badge-stage" id="stageBadge">Cargando...</span>
+  </header>
+
+  <div id="victoryBanner"></div>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Tu progreso</h2>
+      <div class="stat-row"><span class="stat-label">Distancia recorrida</span><span class="stat-value" id="statKm">-</span></div>
+      <div class="stat-row"><span class="stat-label">Distancia total</span><span class="stat-value" id="statTotal">-</span></div>
+      <div class="stat-row"><span class="stat-label">Pasos totales</span><span class="stat-value" id="statSteps">-</span></div>
+      <div class="stat-row"><span class="stat-label">Días caminados</span><span class="stat-value" id="statDays">-</span></div>
+      <div class="stat-row"><span class="stat-label">Racha actual</span><span class="stat-value" id="statStreak">-</span></div>
+      <div class="progress-outer"><div class="progress-inner" id="progressBar" style="width:0%"></div></div>
+      <div class="progress-caption" id="progressCaption">0%</div>
+
+      <h2 style="margin-top:22px;">Registrar hoy</h2>
+      <form class="entry" id="entryForm">
+        <div class="entry-row">
+          <div>
+            <label for="stepsInput">Pasos de hoy</label>
+            <input type="number" id="stepsInput" min="0" placeholder="ej. 8000" required>
+          </div>
+          <button type="submit">Registrar</button>
+        </div>
+        <div class="feedback" id="entryFeedback"></div>
+      </form>
+
+      <details style="margin-top:16px;">
+        <summary style="cursor:pointer; color: var(--ink-soft); font-size:0.85rem;">Ajustes</summary>
+        <div class="entry" style="margin-top:10px;">
+          <label for="strideInput">Longitud de zancada (metros)</label>
+          <input type="number" id="strideInput" step="0.01" min="0.3" max="1.5">
+          <button type="button" class="secondary" id="saveStrideBtn">Guardar zancada</button>
+          <button type="button" class="secondary" id="resetBtn">Reiniciar viaje</button>
+        </div>
+      </details>
+    </div>
+
+    <div class="card" id="map-card">
+      <h2>El mapa</h2>
+      <div class="map-scroll">
+        <svg id="mapSvg" viewBox="0 0 1500 620" xmlns="http://www.w3.org/2000/svg" width="1500"></svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="scene-card" id="sceneCard">
+    <div class="scene-top">
+      <span class="scene-icon" id="sceneIcon">🏡</span>
+      <div>
+        <div class="scene-name" id="sceneName">-</div>
+        <div class="scene-km" id="sceneKm">-</div>
+      </div>
+    </div>
+    <div class="scene-text" id="sceneText">Cargando escena...</div>
+    <div class="company-row" id="companyRow"></div>
+  </div>
+
+  <div class="daily-card" id="dailyCard">
+    <span class="day-tag" id="dailyTag">DÍA 1 DEL VIAJE</span>
+    <span id="dailyText">Cargando el relato de hoy...</span>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Hitos del viaje</h2>
+      <ul class="timeline" id="timelineList"></ul>
+    </div>
+    <div class="card">
+      <h2>Logros</h2>
+      <ul class="achievements" id="achievementsList"></ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Diario de marcha</h2>
+    <div class="history-wrap">
+      <table class="history">
+        <thead><tr><th>Fecha</th><th>Pasos</th><th>Km</th></tr></thead>
+        <tbody id="historyBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

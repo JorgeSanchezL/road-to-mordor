@@ -1,0 +1,152 @@
+const CHAR = {
+  gandalf: { emoji: '🧙', name: 'Gandalf' },
+  aragorn: { emoji: '⚔️', name: 'Aragorn' },
+  legolas: { emoji: '🧝', name: 'Legolas' },
+  gimli: { emoji: '🪓', name: 'Gimli' },
+  boromir: { emoji: '🛡️', name: 'Boromir' },
+  merry: { emoji: '🌿', name: 'Merry' },
+  pippin: { emoji: '🍃', name: 'Pippin' },
+  frodo: { emoji: '🧙\u200d♂️', name: 'Frodo' },
+  sam: { emoji: '🌱', name: 'Sam' },
+  gollum: { emoji: '👁️', name: 'Gollum' },
+  faramir: { emoji: '🏹', name: 'Faramir' },
+  jorge: { emoji: '🥾', name: 'Jorge' }
+};
+
+const FULL_FELLOWSHIP = ['gandalf', 'aragorn', 'legolas', 'gimli', 'boromir', 'frodo', 'sam', 'merry', 'pippin', 'jorge'];
+const HOBBITS_START = ['frodo', 'sam', 'merry', 'pippin', 'jorge'];
+const HOBBITS_ARAGORN = ['frodo', 'sam', 'merry', 'pippin', 'aragorn', 'jorge'];
+const NO_GANDALF = ['aragorn', 'legolas', 'gimli', 'boromir', 'frodo', 'sam', 'merry', 'pippin', 'jorge'];
+const FRODO_SAM = ['frodo', 'sam', 'jorge'];
+const FRODO_SAM_GOLLUM = ['frodo', 'sam', 'gollum', 'jorge'];
+const FRODO_SAM_GOLLUM_FARAMIR = ['frodo', 'sam', 'gollum', 'faramir', 'jorge'];
+
+const MILESTONES = [
+  { id: 'comarca', name: 'La Comarca', km: 0, region: 'shire', icon: '🏡',
+    scene: 'El viaje comienza entre colinas verdes y puertas redondas. Aún no sabéis cuánto camino queda por delante.',
+    achievement: 'Has emprendido el viaje', company: HOBBITS_START },
+  { id: 'baranduin', name: 'Puente del Baranduin', km: 100, region: 'shire', icon: '🌉',
+    scene: 'El puente marca la salida definitiva de tierras conocidas. A partir de aquí, todo es incierto.',
+    achievement: 'Has cruzado el Baranduin', company: HOBBITS_START },
+  { id: 'bree', name: 'Bree', km: 193, region: 'road', icon: '🍺',
+    scene: 'Entre el bullicio de la posada, un desconocido de aspecto severo se ofrece a guiaros.',
+    achievement: 'Has llegado a Bree', company: HOBBITS_ARAGORN },
+  { id: 'cima_vientos', name: 'Cima de los Vientos', km: 343, region: 'road', icon: '🗡️',
+    scene: 'Una noche fría en las ruinas de la colina termina en un ataque que nadie olvidará.',
+    achievement: 'Has sobrevivido a la Cima de los Vientos', company: HOBBITS_ARAGORN },
+  { id: 'vado_bruinen', name: 'Vado de Bruinen', km: 463, region: 'road', icon: '🌊',
+    scene: 'El agua del río se convierte en la última defensa contra quienes os persiguen.',
+    achievement: 'Has cruzado el Vado de Bruinen', company: HOBBITS_ARAGORN },
+  { id: 'rivendel', name: 'Rivendel', km: 676, region: 'elven', icon: '🏛️',
+    scene: 'Representantes de todos los pueblos libres se reúnen y deciden acompañaros hasta el final.',
+    achievement: 'La Comunidad del Anillo se ha formado', company: FULL_FELLOWSHIP },
+  { id: 'caradhras', name: 'Caradhras', km: 756, region: 'wild', icon: '❄️',
+    scene: 'La montaña se resiste a dejaros pasar; el frío y la nieve os obligan a buscar otro camino.',
+    achievement: 'Has desafiado el Caradhras', company: FULL_FELLOWSHIP },
+  { id: 'puertas_moria', name: 'Puertas de Moria', km: 800, region: 'moria', icon: '🚪',
+    scene: 'Una puerta oculta se abre tras resolver un antiguo acertijo grabado en la piedra.',
+    achievement: 'Has entrado en Moria', company: FULL_FELLOWSHIP },
+  { id: 'puente_khazad', name: 'Puente de Khazad-dûm', km: 850, region: 'moria', icon: '🔥',
+    scene: 'En la oscuridad de las minas, alguien se queda atrás para que los demás puedan seguir.',
+    achievement: 'Has cruzado el Puente de Khazad-dûm', company: NO_GANDALF },
+  { id: 'puerta_este_moria', name: 'Puerta Este de Moria', km: 900, region: 'moria', icon: '🌄',
+    scene: 'La luz del día vuelve a veros, pero la alegría del reencuentro está teñida de pérdida.',
+    achievement: 'Has salido de Moria', company: NO_GANDALF },
+  { id: 'lorien', name: 'Lothlórien', km: 958, region: 'elven', icon: '🌳',
+    scene: 'Entre árboles dorados encontráis un breve respiro y algunos regalos que serán de gran ayuda.',
+    achievement: 'Has llegado a Lothlórien', company: NO_GANDALF },
+  { id: 'anduin', name: 'Río Anduin', km: 1198, region: 'river', icon: '🚣',
+    scene: 'Las barcas avanzan en silencio por el río, acercándoos cada vez más a tierras hostiles.',
+    achievement: 'Has navegado el Anduin', company: NO_GANDALF },
+  { id: 'amon_hen', name: 'Amon Hen', km: 1441, region: 'river', icon: '🗿',
+    scene: 'Una traición evitada a tiempo y una despedida forzada cambian el rumbo de todos.',
+    achievement: 'La Comunidad se ha separado', company: FRODO_SAM },
+  { id: 'emyn_muil', name: 'Emyn Muil', km: 1521, region: 'wild', icon: '🪨',
+    scene: 'Entre rocas afiladas, una presencia esquiva empieza a seguir vuestros pasos de cerca.',
+    achievement: 'Has cruzado Emyn Muil', company: FRODO_SAM_GOLLUM },
+  { id: 'cienagas', name: 'Ciénagas de los Muertos', km: 1591, region: 'wild', icon: '💀',
+    scene: 'Luces pálidas bajo el agua advierten de lo que ocurre a quien mira demasiado tiempo.',
+    achievement: 'Has cruzado las Ciénagas de los Muertos', company: FRODO_SAM_GOLLUM },
+  { id: 'puerta_negra', name: 'La Puerta Negra', km: 1698, region: 'mordor', icon: '⚫',
+    scene: 'El paso frontal resulta imposible; hay que buscar otra manera de entrar en el reino de la sombra.',
+    achievement: 'Has llegado a la Puerta Negra', company: FRODO_SAM_GOLLUM },
+  { id: 'ithilien', name: 'Ithilien', km: 1788, region: 'wild', icon: '🍃',
+    scene: 'Un capitán del sur os intercepta, pero decide dejaros continuar contra su propio juicio.',
+    achievement: 'Has descansado en Ithilien', company: FRODO_SAM_GOLLUM_FARAMIR },
+  { id: 'cruce_caminos', name: 'Cruce de los Caminos', km: 1848, region: 'wild', icon: '🗿',
+    scene: 'Una vieja estatua, dañada pero no vencida, señala el camino que aún queda por recorrer.',
+    achievement: 'Has llegado al Cruce de los Caminos', company: FRODO_SAM_GOLLUM_FARAMIR },
+  { id: 'minas_morgul', name: 'Minas Morgul', km: 1875, region: 'mordor', icon: '👻',
+    scene: 'Desde lejos, una ciudad enferma de luz verdosa recuerda lo cerca que estáis del peligro.',
+    achievement: 'Has avistado Minas Morgul', company: FRODO_SAM_GOLLUM },
+  { id: 'escaleras', name: 'Escaleras de Cirith Ungol', km: 1905, region: 'mordor', icon: '🪜',
+    scene: 'Un tramo de escalones tallados en la roca pone a prueba cada paso que dais.',
+    achievement: 'Has ascendido las Escaleras de Cirith Ungol', company: FRODO_SAM_GOLLUM },
+  { id: 'guarida', name: 'Guarida de Ella-Laraña', km: 1920, region: 'mordor', icon: '🕷️',
+    scene: 'Algo antiguo y hambriento habita el túnel; salir de él con vida no está garantizado.',
+    achievement: 'Has sobrevivido a Ella-Laraña', company: FRODO_SAM },
+  { id: 'torre_cirith', name: 'Torre de Cirith Ungol', km: 1930, region: 'mordor', icon: '🏯',
+    scene: 'Una torre vigilada por completo esconde algo que no se puede abandonar sin luchar.',
+    achievement: 'Has escapado de la Torre de Cirith Ungol', company: FRODO_SAM },
+  { id: 'gorgoroth', name: 'Llanura de Gorgoroth', km: 1955, region: 'mordor', icon: '☠️',
+    scene: 'Ceniza, roca y un cielo cerrado marcan los últimos kilómetros antes de la montaña.',
+    achievement: 'Has cruzado la Llanura de Gorgoroth', company: FRODO_SAM },
+  { id: 'destino', name: 'El Monte del Destino', km: 1988, region: 'mordor', icon: '🌋',
+    scene: 'El Anillo se deshace en el fuego del que salió. Después de tanto camino, la tarea ha terminado.',
+    achievement: 'Has llegado al Monte del Destino', company: FRODO_SAM }
+];
+
+const TOTAL_KM = MILESTONES[MILESTONES.length - 1].km;
+
+const DAILY_POOLS = {
+  inicio: [
+    'La niebla se aferra al camino esta mañana, pero seguís avanzando paso a paso.',
+    'Compartís el último trozo de pan; sabe mejor cuando se reparte entre dos.',
+    'El peso de la mochila parece menor cuando hay compañía en el camino.',
+    'Una brisa fría recuerda que el destino aún está lejos, pero no imposible.',
+    'Los pies duelen, mas la voluntad de seguir es más fuerte que el cansancio.',
+    'Un pájaro cruza el cielo gris; parece de buen augurio.',
+    'La ruta se hace cuesta arriba, pero cada paso resta distancia al camino.',
+    'Un pequeño descanso a la sombra de una roca renueva las fuerzas.',
+    'El recuerdo del hogar da fuerzas cuando el paisaje se vuelve hostil.',
+    'La lluvia moja el camino, pero no apaga la determinación de continuar.',
+    'Un mapa gastado se consulta una vez más para no perder el rumbo.',
+    'Las botas gastadas cuentan, sin palabras, cuántas leguas han quedado atrás.'
+  ],
+  comunidad: [
+    'El grupo comparte turno de guardia esta noche; nadie camina solo.',
+    'Gimli refunfuña sobre la falta de cuevas decentes en la superficie.',
+    'Legolas nota algo en el viento que los demás no perciben aún.',
+    'Boromir marca el ritmo con firmeza; nadie discute hoy el paso.',
+    'Aragorn estudia el terreno antes de que amanezca del todo.',
+    'Merry y Pippin encuentran un momento para bromear, pese al cansancio.',
+    'Gandalf guarda silencio buena parte del día, como si algo le preocupara.',
+    'El grupo avanza en fila, atentos a cualquier sonido fuera de lugar.',
+    'Una comida compartida junto al fuego mejora el ánimo de todos.',
+    'El paso se acelera al notar que el cielo se oscurece antes de tiempo.'
+  ],
+  dosCaminantes: [
+    'Gollum guía el camino unos pasos por delante, murmurando para sí mismo.',
+    'Sam vigila de cerca cada movimiento del nuevo guía, sin bajar la guardia.',
+    'El paisaje se vuelve cada vez más hostil y solitario.',
+    'Frodo siente el peso de la carga con más fuerza a cada jornada.',
+    'Una discusión breve entre Sam y Gollum termina en un silencio incómodo.',
+    'El hambre aprieta; el pan de viaje empieza a escasear.',
+    'Un atajo sugerido por el guía ahorra tiempo, aunque nadie confía del todo en él.',
+    'La ausencia del resto de la Comunidad se nota más en las noches frías.',
+    'Un ave lejana es lo único que rompe el silencio del paisaje yermo.',
+    'Frodo mira hacia atrás una última vez antes de continuar.'
+  ],
+  sombra: [
+    'El aire pesa cada vez más, cargado de ceniza y calor lejano.',
+    'Sam reparte lo poco que queda de agua sin decir una palabra.',
+    'Cada paso cuesta el doble entre la ceniza suelta del suelo.',
+    'La luz del cielo apenas cambia; el día y la noche se confunden aquí.',
+    'Frodo avanza apoyándose en Sam más de lo que quisiera admitir.',
+    'El resplandor lejano de la montaña marca el rumbo cuando todo lo demás falla.',
+    'Un descanso breve entre rocas calientes es todo lo que se puede permitir.',
+    'La determinación pesa más que el cansancio, al menos por ahora.',
+    'El silencio de esta tierra resulta más inquietante que cualquier ruido.',
+    'El final del camino empieza a sentirse real, aunque aún queda trecho.'
+  ]
+};
