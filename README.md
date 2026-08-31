@@ -12,7 +12,7 @@ Tu progreso se guarda en el propio navegador (`localStorage`), así que si vuelv
 
 Para instalarla en la pantalla de inicio necesitas abrirla desde una URL (no desde un archivo local del teléfono), porque así funcionan las reglas de instalación de iOS y Android:
 
-1. Sube la carpeta `camino-a-mordor` a un hosting estático gratuito. La forma más rápida sin cuenta: entra en `app.netlify.com/drop` desde el ordenador y arrastra la carpeta; te da una URL al momento. Otras opciones: GitHub Pages o Vercel.
+1. Sube la carpeta `camino-a-mordor` a un hosting estático.
 2. Abre esa URL en el navegador del móvil (Safari en iPhone, Chrome en Android).
 3. En iPhone: pulsa el icono de compartir → "Añadir a pantalla de inicio". En Android: menú ⋮ → "Añadir a pantalla de inicio" o "Instalar aplicación".
 4. Se creará un icono en tu pantalla de inicio que abre la app a pantalla completa, sin barra del navegador, como una app normal.
