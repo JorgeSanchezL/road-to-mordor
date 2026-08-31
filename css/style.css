@@ -259,3 +259,10 @@ table.history td { font-family: 'JetBrains Mono', monospace; }
 .victory-stat { text-align: center; }
 .victory-stat .v-value { font-family: 'JetBrains Mono', monospace; font-size: 1.3rem; font-weight: 600; }
 .victory-stat .v-label { font-size: 0.8rem; color: var(--ink-soft); }
+
+.app-footer {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  padding-top: 10px;
+}

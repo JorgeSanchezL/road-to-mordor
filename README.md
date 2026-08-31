@@ -21,21 +21,30 @@ El proyecto ya incluye `manifest.json`, iconos y un `service-worker.js` para que
 
 ### Importante: cómo actualizar la app ya instalada
 
-El service worker sirve los archivos desde su caché. El navegador solo descarga la nueva versión de la app cuando el propio `service-worker.js` cambia de contenido. Por eso, cada vez que subas cambios reales al repositorio, sube también el número de versión en la primera línea de `service-worker.js` (por ejemplo, de `camino-a-mordor-v2` a `camino-a-mordor-v3`). Si no lo haces, la app ya instalada en el móvil seguirá mostrando la versión antigua indefinidamente, aunque el repositorio esté actualizado.
+El proyecto usa [semver](https://semver.org/lang/es/) (`MAYOR.MENOR.PARCHE`), empezando en `1.0.0`. El número vive en `js/version.js` y se muestra en el pie de la app.
+
+El service worker sirve los archivos desde su caché, y el navegador solo descarga la nueva versión cuando el propio `service-worker.js` cambia de contenido. Por eso, **cada vez que subas cambios reales, tienes que actualizar el número en dos sitios a la vez**:
+
+1. `js/version.js` → cambia `APP_VERSION`.
+2. `service-worker.js` → cambia `CACHE_NAME` para que coincida (por ejemplo, de `camino-a-mordor-v1.0.0` a `camino-a-mordor-v1.1.0`).
+
+Opcionalmente, actualiza también `version` en `package.json` para que quede registrado como referencia del proyecto (no afecta al funcionamiento).
 
 Tu progreso (pasos, logros) no se ve afectado por nada de esto: se guarda en el navegador con `localStorage`, independientemente de los archivos de la app.
 
 ## Estructura del proyecto
 
 ```
-camino-a-mordor/
+road-to-mordor/
 ├── index.html          estructura de la página
 ├── manifest.json        configuración para instalarla como app
 ├── service-worker.js     permite abrirla sin conexión
+├── package.json          nombre y versión del proyecto
 ├── icons/                iconos de la app
 ├── css/
 │   └── style.css        todos los estilos
 └── js/
+    ├── version.js         número de versión (semver)
     ├── data.js           hitos, personajes y frases del diario
     └── app.js             lógica de la aplicación
 ```

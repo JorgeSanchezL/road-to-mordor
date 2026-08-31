@@ -1,8 +1,9 @@
-const CACHE_NAME = 'camino-a-mordor-v2';
+const CACHE_NAME = 'camino-a-mordor-v1.0.0';
 const ASSETS = [
   './',
   './index.html',
   './css/style.css',
+  './js/version.js',
   './js/data.js',
   './js/app.js',
   './manifest.json',

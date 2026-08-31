@@ -306,4 +306,5 @@ state = loadState();
 if (!state.startDate) state.startDate = todayKey();
 if (!state.reachedDates) state.reachedDates = {};
 syncAchievements(totalKm());
+document.getElementById('appVersion').textContent = APP_VERSION;
 render();
