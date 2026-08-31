@@ -19,6 +19,12 @@ Para instalarla en la pantalla de inicio necesitas abrirla desde una URL (no des
 
 El proyecto ya incluye `manifest.json`, iconos y un `service-worker.js` para que esto funcione y la app se pueda abrir incluso sin conexión una vez instalada.
 
+### Importante: cómo actualizar la app ya instalada
+
+El service worker sirve los archivos desde su caché. El navegador solo descarga la nueva versión de la app cuando el propio `service-worker.js` cambia de contenido. Por eso, cada vez que subas cambios reales al repositorio, sube también el número de versión en la primera línea de `service-worker.js` (por ejemplo, de `camino-a-mordor-v2` a `camino-a-mordor-v3`). Si no lo haces, la app ya instalada en el móvil seguirá mostrando la versión antigua indefinidamente, aunque el repositorio esté actualizado.
+
+Tu progreso (pasos, logros) no se ve afectado por nada de esto: se guarda en el navegador con `localStorage`, independientemente de los archivos de la app.
+
 ## Estructura del proyecto
 
 ```
