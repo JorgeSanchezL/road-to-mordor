@@ -1,6 +1,6 @@
 {
   "name": "camino-a-mordor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "App para registrar pasos diarios y avanzar por el camino de Frodo y Sam hacia el Monte del Destino.",
   "private": true
 }
