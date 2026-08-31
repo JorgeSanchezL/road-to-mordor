@@ -18,6 +18,8 @@
 
 * { box-sizing: border-box; }
 
+html, body { overflow-x: hidden; width: 100%; }
+
 body {
   margin: 0;
   background: radial-gradient(ellipse at top, #f4ecd6, var(--parchment) 55%, var(--parchment-dark) 100%);
@@ -67,12 +69,14 @@ h1 {
   margin-bottom: 26px;
 }
 @media (max-width: 800px) { .grid { grid-template-columns: 1fr; } }
+.grid > * { min-width: 0; }
 
 .card {
   background: rgba(255,251,240,0.55);
   border: 1px solid var(--gold);
   border-radius: 4px;
   padding: 20px 22px;
+  min-width: 0;
 }
 
 .card h2 {
@@ -122,7 +126,7 @@ form.entry { display: flex; flex-direction: column; gap: 10px; margin-top: 6px; 
   color: var(--ink);
   width: 100%;
 }
-.entry-row { display: flex; gap: 10px; align-items: flex-end; }
+.entry-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; }
 .entry-row > div { flex: 1; }
 
 button {
@@ -148,8 +152,9 @@ button.secondary:hover { background: rgba(58,44,30,0.08); color: var(--ink); }
 
 .feedback { font-size: 0.9rem; color: var(--forest); min-height: 1.2em; }
 
-.map-scroll { overflow-x: auto; padding-bottom: 6px; }
-.map-scroll svg { display: block; height: auto; }
+.map-scroll { width: 100%; min-width: 0; overflow-x: auto; padding-bottom: 6px; }
+.map-scroll svg { display: block; width: 1500px; max-width: none; height: auto; }
+.map-hint { font-size: 0.8rem; color: var(--ink-soft); margin: -8px 0 10px; }
 
 .trail-path { fill: none; stroke: var(--ink-soft); stroke-width: 3; stroke-dasharray: 2 9; stroke-linecap: round; }
 .trail-path-done { fill: none; stroke: var(--ember); stroke-width: 4; stroke-linecap: round; }
