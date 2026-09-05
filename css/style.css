@@ -127,7 +127,7 @@ form.entry { display: flex; flex-direction: column; gap: 10px; margin-top: 6px; 
   width: 100%;
 }
 .entry-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; }
-.entry-row > div { flex: 1; }
+.entry-row > div { flex: 1 1 130px; }
 
 button {
   font-family: 'Cinzel', serif;

@@ -12,7 +12,7 @@ Tu progreso se guarda en el propio navegador (`localStorage`), así que si vuelv
 
 Para instalarla en la pantalla de inicio necesitas abrirla desde una URL (no desde un archivo local del teléfono), porque así funcionan las reglas de instalación de iOS y Android:
 
-1. Sube la carpeta `camino-a-mordor` a un hosting estático.
+1. Sube la carpeta `camino-a-mordor` a un hosting estático gratuito.
 2. Abre esa URL en el navegador del móvil (Safari en iPhone, Chrome en Android).
 3. En iPhone: pulsa el icono de compartir → "Añadir a pantalla de inicio". En Android: menú ⋮ → "Añadir a pantalla de inicio" o "Instalar aplicación".
 4. Se creará un icono en tu pantalla de inicio que abre la app a pantalla completa, sin barra del navegador, como una app normal.
@@ -29,6 +29,7 @@ El service worker sirve los archivos desde su caché, y el navegador solo descar
 2. `service-worker.js` → cambia `CACHE_NAME` para que coincida (por ejemplo, de `camino-a-mordor-v1.0.0` a `camino-a-mordor-v1.1.0`).
 
 Opcionalmente, actualiza también `version` en `package.json` para que quede registrado como referencia del proyecto (no afecta al funcionamiento).
+
 
 Tu progreso (pasos, logros) no se ve afectado por nada de esto: se guarda en el navegador con `localStorage`, independientemente de los archivos de la app.
 

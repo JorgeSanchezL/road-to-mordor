@@ -39,7 +39,11 @@
       <form class="entry" id="entryForm">
         <div class="entry-row">
           <div>
-            <label for="stepsInput">Pasos de hoy</label>
+            <label for="dateInput">Fecha</label>
+            <input type="date" id="dateInput" required>
+          </div>
+          <div>
+            <label for="stepsInput">Pasos</label>
             <input type="number" id="stepsInput" min="0" placeholder="ej. 8000" required>
           </div>
           <button type="submit">Registrar</button>
@@ -104,7 +108,6 @@
       </table>
     </div>
   </div>
-
 
   <footer class="app-footer">El Camino a Mordor · v<span id="appVersion"></span></footer>
 
