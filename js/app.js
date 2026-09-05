@@ -270,6 +270,46 @@ document.getElementById('dateInput').addEventListener('change', (e) => {
   stepsInput.value = state.history[date] || '';
 });
 
+function exportState() {
+  const dataStr = JSON.stringify(state, null, 2);
+  const blob = new Blob([dataStr], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `road-to-mordor-progreso-${todayKey()}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function isValidImportedState(parsed) {
+  return parsed && typeof parsed === 'object' && typeof parsed.history === 'object';
+}
+
+function importStateFromFile(file) {
+  const reader = new FileReader();
+  reader.onload = () => {
+    let parsed;
+    try {
+      parsed = JSON.parse(reader.result);
+    } catch (e) {
+      alert('No se pudo leer el archivo. Asegúrate de que es un JSON exportado desde esta app.');
+      return;
+    }
+    if (!isValidImportedState(parsed)) {
+      alert('El archivo no tiene un formato de progreso válido.');
+      return;
+    }
+    if (!confirm('Esto sustituirá tu progreso actual por el del archivo importado. ¿Continuar?')) return;
+    state = Object.assign(defaultState(), parsed);
+    saveState();
+    syncAchievements(totalKm());
+    render();
+  };
+  reader.readAsText(file);
+}
+
 document.getElementById('entryForm').addEventListener('submit', (e) => {
   e.preventDefault();
   const dateInput = document.getElementById('dateInput');
@@ -305,6 +345,18 @@ document.getElementById('saveStrideBtn').addEventListener('click', () => {
     syncAchievements(totalKm());
     render();
   }
+});
+
+document.getElementById('exportBtn').addEventListener('click', exportState);
+
+document.getElementById('importBtn').addEventListener('click', () => {
+  document.getElementById('importInput').click();
+});
+
+document.getElementById('importInput').addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if (file) importStateFromFile(file);
+  e.target.value = '';
 });
 
 document.getElementById('resetBtn').addEventListener('click', () => {

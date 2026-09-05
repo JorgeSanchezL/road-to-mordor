@@ -6,7 +6,7 @@ Aplicación para registrar tus pasos diarios y ver tu avance a lo largo del viaj
 
 Abre `index.html` con doble clic en cualquier navegador. No necesita instalación ni conexión a internet salvo para cargar las tipografías.
 
-Tu progreso se guarda en el propio navegador (`localStorage`), así que si vuelves a abrir el mismo archivo desde el mismo navegador y ordenador, seguirás donde lo dejaste. Si cambias de navegador o de equipo, el progreso no se traslada automáticamente.
+Tu progreso se guarda en el propio navegador (`localStorage`), así que si vuelves a abrir el mismo archivo desde el mismo navegador y ordenador, seguirás donde lo dejaste. Si cambias de navegador o de equipo, el progreso no se traslada automáticamente — para eso usa "Exportar progreso" en Ajustes, que descarga un `.json` con todo tu avance, e "Importar progreso" en el otro dispositivo para restaurarlo.
 
 ## Usarla en el móvil como aplicación
 
@@ -30,6 +30,12 @@ El service worker sirve los archivos desde su caché, y el navegador solo descar
 
 Opcionalmente, actualiza también `version` en `package.json` para que quede registrado como referencia del proyecto (no afecta al funcionamiento).
 
+Criterio orientativo para elegir qué número subir:
+- **Parche** (`1.0.0` → `1.0.1`): arreglos de errores o ajustes visuales, sin cambios de datos ni de comportamiento.
+- **Menor** (`1.0.0` → `1.1.0`): añades funcionalidad nueva (más hitos, más logros, nuevas frases) sin romper el progreso guardado.
+- **Mayor** (`1.0.0` → `2.0.0`): cambios que rompen compatibilidad con el progreso guardado (por ejemplo, si cambias la estructura del `history` o el `STORAGE_KEY`).
+
+Si no cambias `CACHE_NAME`, la app ya instalada en el móvil seguirá mostrando la versión antigua indefinidamente, aunque el repositorio esté actualizado.
 
 Tu progreso (pasos, logros) no se ve afectado por nada de esto: se guarda en el navegador con `localStorage`, independientemente de los archivos de la app.
 
