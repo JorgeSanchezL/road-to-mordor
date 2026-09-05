@@ -1,4 +1,4 @@
-const CACHE_NAME = 'camino-a-mordor-v1.1.0';
+const CACHE_NAME = 'road-to-mordor-v1.2.1';
 const ASSETS = [
   './',
   './index.html',

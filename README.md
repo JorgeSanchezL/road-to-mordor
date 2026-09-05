@@ -6,7 +6,7 @@ Aplicación para registrar tus pasos diarios y ver tu avance a lo largo del viaj
 
 Abre `index.html` con doble clic en cualquier navegador. No necesita instalación ni conexión a internet salvo para cargar las tipografías.
 
-Tu progreso se guarda en el propio navegador (`localStorage`), así que si vuelves a abrir el mismo archivo desde el mismo navegador y ordenador, seguirás donde lo dejaste. Si cambias de navegador o de equipo, el progreso no se traslada automáticamente.
+Tu progreso se guarda en el propio navegador (`localStorage`), así que si vuelves a abrir el mismo archivo desde el mismo navegador y ordenador, seguirás donde lo dejaste. Si cambias de navegador o de equipo, el progreso no se traslada automáticamente — para eso usa "Exportar progreso" en Ajustes, que descarga un `.json` con todo tu avance, e "Importar progreso" en el otro dispositivo para restaurarlo.
 
 ## Usarla en el móvil como aplicación
 
@@ -29,7 +29,6 @@ El service worker sirve los archivos desde su caché, y el navegador solo descar
 2. `service-worker.js` → cambia `CACHE_NAME` para que coincida (por ejemplo, de `camino-a-mordor-v1.0.0` a `camino-a-mordor-v1.1.0`).
 
 Opcionalmente, actualiza también `version` en `package.json` para que quede registrado como referencia del proyecto (no afecta al funcionamiento).
-
 
 Tu progreso (pasos, logros) no se ve afectado por nada de esto: se guarda en el navegador con `localStorage`, independientemente de los archivos de la app.
 
