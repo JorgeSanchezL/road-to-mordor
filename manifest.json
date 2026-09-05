@@ -1,6 +1,6 @@
 {
   "name": "El Camino a Mordor",
-  "short_name": "Mordor",
+  "short_name": "Camino a Mordor",
   "description": "Registra tus pasos diarios y avanza por el camino de Frodo y Sam hacia el Monte del Destino.",
   "start_url": "./index.html",
   "scope": "./",
