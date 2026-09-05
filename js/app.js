@@ -264,21 +264,33 @@ function render() {
   renderVictory(km);
 }
 
+document.getElementById('dateInput').addEventListener('change', (e) => {
+  const date = e.target.value;
+  const stepsInput = document.getElementById('stepsInput');
+  stepsInput.value = state.history[date] || '';
+});
+
 document.getElementById('entryForm').addEventListener('submit', (e) => {
   e.preventDefault();
-  const input = document.getElementById('stepsInput');
-  const steps = parseInt(input.value, 10);
+  const dateInput = document.getElementById('dateInput');
+  const stepsInput = document.getElementById('stepsInput');
+  const date = dateInput.value;
+  const steps = parseInt(stepsInput.value, 10);
   const feedback = document.getElementById('entryFeedback');
+  if (!date) {
+    feedback.textContent = 'Elige una fecha.';
+    return;
+  }
   if (!steps || steps < 0) {
     feedback.textContent = 'Introduce un número de pasos válido.';
     return;
   }
-  const key = todayKey();
-  state.history[key] = steps;
+  state.history[date] = steps;
   if (saveState()) {
     syncAchievements(totalKm());
-    feedback.textContent = 'Pasos registrados para hoy.';
-    input.value = '';
+    feedback.textContent = `Pasos registrados para el ${date}.`;
+    dateInput.value = todayKey();
+    stepsInput.value = '';
     render();
   } else {
     feedback.textContent = 'No se pudo guardar el progreso.';
@@ -307,4 +319,6 @@ if (!state.startDate) state.startDate = todayKey();
 if (!state.reachedDates) state.reachedDates = {};
 syncAchievements(totalKm());
 document.getElementById('appVersion').textContent = APP_VERSION;
+document.getElementById('dateInput').value = todayKey();
+document.getElementById('dateInput').max = todayKey();
 render();
